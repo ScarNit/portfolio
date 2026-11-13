@@ -54,3 +54,12 @@ The CV text lives in `tools/make_cv.py` (Python, needs `pip install reportlab`):
 ```bash
 python3 tools/make_cv.py public/Tin-Skarpa-CV.pdf
 ```
+
+## Link preview image
+
+`public/og.png` is the picture shown when the site link is shared. To rebuild it
+after changing screenshots (needs `pip install pillow`):
+
+```bash
+python3 tools/make_og.py .
+```

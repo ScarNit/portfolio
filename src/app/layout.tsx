@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Silkscreen } from "next/font/google";
-import { profile } from "@/data/content";
+import { profile, siteUrl } from "@/data/content";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -14,14 +14,17 @@ const pixel = Silkscreen({
   variable: "--font-pixel-face",
 });
 
+const title = `${profile.name} — Game Developer · Unity & C#`;
+const description = `${profile.tagline} ${profile.intro}`;
+// Link previews need an absolute image URL.
+const preview = { url: `${siteUrl}/og.png`, width: 1200, height: 630, alt: `${profile.name}: ${profile.tagline}` };
+
 export const metadata: Metadata = {
-  title: `${profile.name} — Game Developer · Unity & C#`,
-  description: profile.intro,
-  openGraph: {
-    title: `${profile.name} — Game Developer · Unity & C#`,
-    description: profile.intro,
-    type: "website",
-  },
+  title,
+  description,
+  alternates: { canonical: `${siteUrl}/` },
+  openGraph: { title, description, type: "website", url: `${siteUrl}/`, siteName: profile.name, images: [preview] },
+  twitter: { card: "summary_large_image", title, description, images: [preview.url] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
