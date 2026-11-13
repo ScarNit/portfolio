@@ -50,12 +50,16 @@ def link(url, text):
 
 story.append(Paragraph("Tin Škarpa", name))
 story.append(Paragraph("Game Developer (Unity, C#) | Computer Science Student", sub))
-story.append(Paragraph(" &nbsp;|&nbsp; ".join([
+SEP = " &nbsp;|&nbsp; "
+story.append(Paragraph(SEP.join([
     "Zagreb, Croatia",
     link("mailto:tinskarpa10@gmail.com", "tinskarpa10@gmail.com"),
+    link("https://www.linkedin.com/in/tin-skarpa-587876273/", "linkedin.com/in/tin-skarpa-587876273"),
+]), contact))
+story.append(Paragraph(SEP.join([
+    "Portfolio: " + link("https://scarnit.github.io/portfolio/", "scarnit.github.io/portfolio"),
     link("https://scarnit.itch.io", "scarnit.itch.io"),
     link("https://github.com/ScarNit", "github.com/ScarNit"),
-    link("https://www.linkedin.com/in/tin-skarpa-587876273/", "linkedin.com/in/tin-skarpa-587876273"),
 ]), contact))
 
 section("Profile")
@@ -115,6 +119,6 @@ story.append(Paragraph("Video Game Development with Unity Game Engine and C#, Ma
 story.append(Paragraph("<b>Languages:</b> Croatian (native), English (C1)", base))
 
 doc = SimpleDocTemplate(sys.argv[1], pagesize=A4, leftMargin=16 * mm, rightMargin=16 * mm,
-                        topMargin=12 * mm, bottomMargin=10 * mm,
+                        topMargin=10 * mm, bottomMargin=8 * mm,
                         title="Tin Škarpa – CV", author="Tin Škarpa")
 doc.build(story)
