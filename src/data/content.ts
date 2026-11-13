@@ -21,12 +21,15 @@ export const profile = {
   ],
 };
 
+/** Prefix for files in /public, so links work when the site is served from a sub-path. */
+export const asset = (path: string) => (process.env.NEXT_PUBLIC_BASE_PATH ?? "") + path;
+
 export const links = {
   github: "https://github.com/ScarNit",
   linkedin: "https://www.linkedin.com/in/tin-skarpa-587876273/",
   itch: "https://scarnit.itch.io",
   email: "tinskarpa10@gmail.com",
-  cv: "/Tin-Skarpa-CV.pdf",
+  cv: asset("/Tin-Skarpa-CV.pdf"),
 };
 
 export type Project = {

@@ -1,4 +1,4 @@
-import { projects, type Project } from "@/data/content";
+import { asset, projects, type Project } from "@/data/content";
 import PixelSprite from "./PixelSprite";
 import Section from "./Section";
 import { COVERS } from "./sprites";
@@ -11,10 +11,10 @@ function Cover({ project, index }: { project: Project; index: number }) {
     <div className="game-cover relative aspect-[16/9] overflow-hidden border-b-2 border-line">
       {project.media ? (
         /\.(mp4|webm)$/i.test(project.media) ? (
-          <video src={project.media} autoPlay muted loop playsInline className="absolute inset-0 size-full object-cover" />
+          <video src={asset(project.media)} autoPlay muted loop playsInline className="absolute inset-0 size-full object-cover" />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={project.media} alt={`${project.title} gameplay`} loading="lazy" className="absolute inset-0 size-full object-cover" />
+          <img src={asset(project.media)} alt={`${project.title} gameplay`} loading="lazy" className="absolute inset-0 size-full object-cover" />
         )
       ) : (
         // Box art until a gameplay clip is set in content.ts
