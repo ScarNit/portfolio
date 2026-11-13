@@ -45,9 +45,9 @@ export type Project = {
   tech: string[];
   /** CSS colour used for this card's accents. */
   accent: string;
-  /** Pixel cover art shown until `media` is set. */
+  /** Pixel cover art, used only if `media` is not set. */
   cover: CoverKey;
-  /** Path under /public, e.g. "/media/try.mp4" or "/media/try.gif". */
+  /** Screenshot, GIF or video under /public, e.g. "/media/try.mp4". */
   media?: string;
   /** First link is the primary button. */
   links: { label: string; href: string }[];
@@ -69,6 +69,7 @@ export const projects: Project[] = [
     tech: ["Unity 2D", "C#", "PixelLab pixel art", "Level design"],
     accent: "#ffb224",
     cover: "try",
+    media: "/media/try.png",
     links: [{ label: "Play on itch.io", href: "https://scarnit.itch.io/try" }],
   },
   {
@@ -86,6 +87,7 @@ export const projects: Project[] = [
     tech: ["Unity 6 (URP)", "C#", "WebGL", "AI-assisted tooling"],
     accent: "#3fcf8e",
     cover: "lucky",
+    media: "/media/lucky-seven.png",
     links: [{ label: "Play in browser", href: "https://scarnit.itch.io/lucky-seven-honest" }],
   },
   {
@@ -103,6 +105,7 @@ export const projects: Project[] = [
     tech: ["Unity 2D", "C#", "Wave design", "Balancing"],
     accent: "#9db552",
     cover: "laststand",
+    media: "/media/last-stand.jpg",
     links: [{ label: "Play in browser", href: "https://scarnit.itch.io/last-stand" }],
   },
   {
@@ -117,6 +120,7 @@ export const projects: Project[] = [
     tech: ["Unity 2D", "C#", "Combat design"],
     accent: "#f0524f",
     cover: "samurai",
+    media: "/media/attack-on-samurai.jpg",
     links: [{ label: "Play on itch.io", href: "https://scarnit.itch.io/attack-on-samurai" }],
   },
 ];

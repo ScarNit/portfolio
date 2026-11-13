@@ -79,6 +79,17 @@ body {
     linear-gradient(to bottom, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px);
   background-size: 100% 100%, 16px 16px, 16px 16px;
 }
+/* Real screenshots: light edge shading, slow zoom on hover */
+.cover-shade {
+  background: radial-gradient(ellipse at center, transparent 60%, rgb(0 0 0 / 0.45) 100%);
+}
+.cover-media {
+  transition: transform 400ms ease-out;
+}
+.game-card:hover .cover-media,
+.game-card:focus-within .cover-media {
+  transform: scale(1.04);
+}
 /* HUD corner brackets */
 .hud-corner {
   position: absolute;
@@ -148,6 +159,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .blink, .pulse-dot { animation: none; }
-  .px-shadow, .game-card, .hud-corner { transition: none; }
+  .px-shadow, .game-card, .hud-corner, .cover-media { transition: none; }
+  .game-card:hover .cover-media, .game-card:focus-within .cover-media { transform: none; }
   .px-shadow:hover, .px-shadow:active, .game-card:hover, .game-card:focus-within { transform: none; }
 }

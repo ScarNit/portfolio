@@ -7,17 +7,19 @@ const STATUS_COLOR = { published: "#3fcf8e", jam: "#ffb224", dev: "#a89d86" };
 
 function Cover({ project, index }: { project: Project; index: number }) {
   const primary = project.links[0];
+  // Over a real screenshot the labels sit at the bottom, clear of the game's own HUD and title.
+  const edge = project.media ? "bottom-3.5" : "top-3.5";
   return (
     <div className="game-cover relative aspect-[16/9] overflow-hidden border-b-2 border-line">
       {project.media ? (
         /\.(mp4|webm)$/i.test(project.media) ? (
-          <video src={asset(project.media)} autoPlay muted loop playsInline className="absolute inset-0 size-full object-cover" />
+          <video src={asset(project.media)} autoPlay muted loop playsInline className="cover-media absolute inset-0 size-full object-cover" />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={asset(project.media)} alt={`${project.title} gameplay`} loading="lazy" className="absolute inset-0 size-full object-cover" />
+          <img src={asset(project.media)} alt={`${project.title} screenshot`} loading="lazy" className="cover-media absolute inset-0 size-full object-cover" />
         )
       ) : (
-        // Box art until a gameplay clip is set in content.ts
+        // Pixel box art when no screenshot or clip is set in content.ts
         <div aria-hidden="true" className="absolute inset-0 flex items-center gap-5 px-8 sm:gap-7 sm:px-10">
           <PixelSprite rows={COVERS[project.cover]} className="cover-sprite w-24 shrink-0 drop-shadow-[4px_4px_0_rgb(0_0_0/0.6)] sm:w-32" />
           <p className="font-pixel text-2xl font-bold uppercase leading-[1.05] text-[var(--accent)] sm:text-3xl">
@@ -26,24 +28,27 @@ function Cover({ project, index }: { project: Project; index: number }) {
         </div>
       )}
 
-      <div aria-hidden="true" className="crt-overlay pointer-events-none absolute inset-0 opacity-70" />
+      <div
+        aria-hidden="true"
+        className={"pointer-events-none absolute inset-0 " + (project.media ? "cover-shade" : "crt-overlay opacity-70")}
+      />
       <span aria-hidden="true" className="hud-corner tl" />
       <span aria-hidden="true" className="hud-corner tr" />
       <span aria-hidden="true" className="hud-corner bl" />
       <span aria-hidden="true" className="hud-corner br" />
 
-      <p className="absolute top-4 left-5 font-pixel text-[10px] uppercase tracking-wider text-dim">
+      <p className={edge + " absolute left-5 bg-ink/80 px-2 py-1 font-pixel text-[10px] uppercase tracking-wider text-bone"}>
         No. {String(index + 1).padStart(2, "0")} · {project.year}
       </p>
       <p
-        className="absolute top-3.5 right-5 flex items-center gap-2 border border-current bg-ink/80 px-2 py-1 font-pixel text-[10px] uppercase tracking-wider"
+        className={edge + " absolute right-5 flex items-center gap-2 border border-current bg-ink/85 px-2 py-1 font-pixel text-[10px] uppercase tracking-wider"}
         style={{ color: STATUS_COLOR[project.status.kind] }}
       >
         <span aria-hidden="true" className={"status-dot " + (project.status.kind === "published" ? "pulse-dot" : "")} />
         {project.status.label}
       </p>
-      {primary && (
-        <p aria-hidden="true" className="press-play absolute right-5 bottom-4 font-pixel text-[10px] uppercase tracking-wider text-bone">
+      {primary && !project.media && (
+        <p aria-hidden="true" className="press-play absolute right-5 bottom-4 bg-ink/80 px-2 py-1 font-pixel text-[10px] uppercase tracking-wider text-bone">
           ▶ Press play
         </p>
       )}
